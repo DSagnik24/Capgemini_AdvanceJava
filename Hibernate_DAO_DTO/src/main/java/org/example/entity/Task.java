@@ -6,22 +6,27 @@ import jakarta.persistence.*;
 @Table(name = "tasks")
 public class Task {
 
-    @Id  // 🔥 PRIMARY KEY
+    @Id   // 🔥 PRIMARY KEY
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
+    @ManyToOne(optional = false)  // FK cannot be null
+    @JoinColumn(
+            name = "student_id",   // FK column
+            nullable = false,      // NOT NULL constraint
+            foreignKey = @ForeignKey(name = "fk_task_student")
+    )
     private Student student;
 
     public Task() {}
 
-    public Task(String title, String status) {
+    public Task(String title, String status, Student student) {
         this.title = title;
         this.status = status;
+        this.student = student;
     }
 
     // getters & setters

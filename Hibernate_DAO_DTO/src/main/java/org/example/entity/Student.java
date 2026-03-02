@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "students")
 public class Student {
 
-    @Id  // 🔥 PRIMARY KEY
+    @Id  //
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
